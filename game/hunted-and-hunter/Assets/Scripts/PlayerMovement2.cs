@@ -64,7 +64,7 @@ public class PlayerMovement2 : MonoBehaviour
 
 		while (timer < accelerationDuration)
 		{
-			characterController.Move(transform.forward * movementSpeed * 1.2f * Time.deltaTime);
+			characterController.Move(transform.forward * movementSpeed * 1.6f * Time.deltaTime);
 
 			timer += Time.deltaTime;
 			yield return null;

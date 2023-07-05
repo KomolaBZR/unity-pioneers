@@ -7,10 +7,13 @@ public class Finish : MonoBehaviour
 {
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.name == "Fox" || other.gameObject.name == "Rabbit")
+        if (other.gameObject.name == "Rabbit" && SceneManager.GetActiveScene().name == "RabbitScene")
         {
-            SceneManager.LoadScene("EndScene");
-            // SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+            SceneManager.LoadScene("EndRabbitScene");
+        }
+        else 
+        {
+            SceneManager.LoadScene("EndFoxScene");
         }
     }
 }

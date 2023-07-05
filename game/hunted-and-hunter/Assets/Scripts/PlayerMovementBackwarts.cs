@@ -64,7 +64,7 @@ public class PlayerMovementBackwarts : MonoBehaviour
 
 		while (timer < accelerationDuration)
 		{
-			characterController.Move(-1 * transform.forward * movementSpeed * 1.5f * Time.deltaTime);
+			characterController.Move(-1 * transform.forward * movementSpeed * 1.6f * Time.deltaTime);
 
 			timer += Time.deltaTime;
 			yield return null;

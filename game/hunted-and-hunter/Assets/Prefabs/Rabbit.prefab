@@ -153,7 +153,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: bda0d3182ac9aa64a841c89f32247ba8,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.17
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: bda0d3182ac9aa64a841c89f32247ba8,
         type: 3}
@@ -280,6 +280,11 @@ PrefabInstance:
       propertyPath: m_CullingMode
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5866666021909216657, guid: bda0d3182ac9aa64a841c89f32247ba8,
+        type: 3}
+      propertyPath: m_ApplyRootMotion
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 9179017853419834167, guid: bda0d3182ac9aa64a841c89f32247ba8,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -361,7 +366,7 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2410927723351939344}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 3
   m_Height: 0.03464505
