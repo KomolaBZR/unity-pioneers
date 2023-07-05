@@ -8,7 +8,7 @@ public class RabbitDefaultMovement : MonoBehaviour
     public GameObject gameOverWindow;
     private CharacterController characterController;
     private Animator animator;
-
+    [SerializeField] AudioSource deathSound;
     [SerializeField] private float moveSpeed = 4f;
     [SerializeField] private float rotationSpeed = 10f;
     [SerializeField] private float minDistance = 1f;
@@ -55,8 +55,14 @@ public class RabbitDefaultMovement : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player") && !gameOver)
         {
-            gameOverWindow.SetActive(true);
-            gameOver = true;
+            GetComponent<PlayerMovement2>().enabled = false;
+            Die();
         }
+    }
+     private void Die()
+    {
+        deathSound.Play();
+        gameOverWindow.SetActive(true);
+        gameOver = true;
     }
 }

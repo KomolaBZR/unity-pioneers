@@ -10,7 +10,7 @@ public class FoxDefaultMovement : MonoBehaviour
     public GameObject gameOverWindow;
     private CharacterController characterController;
     private Animator animator;
-
+    [SerializeField] AudioSource deathSound;
     [SerializeField] private float moveSpeed = 4f;
     [SerializeField] private float rotationSpeed = 10f;
     [SerializeField] private float minDistance = 1f;
@@ -52,12 +52,19 @@ public class FoxDefaultMovement : MonoBehaviour
         }
     }
     private void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.CompareTag("Player") && !gameOver)
-        {
-            gameOverWindow.SetActive(true);
-            gameOver = true;
-        }
-    }
+	{
+		if (other.gameObject.CompareTag("Player") && !gameOver)
+		{
+			other.gameObject.GetComponent<PlayerMovementBackwarts>().enabled = false;
+			Die();
+		}
+	}
+
+	private void Die()
+	{
+		deathSound.Play();
+		gameOverWindow.SetActive(true);
+		gameOver = true;
+	}
 
 }

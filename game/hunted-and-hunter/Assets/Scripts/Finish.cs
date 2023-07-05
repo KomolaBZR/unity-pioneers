@@ -9,7 +9,8 @@ public class Finish : MonoBehaviour
     {
         if (other.gameObject.name == "Fox" || other.gameObject.name == "Rabbit")
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+            SceneManager.LoadScene("EndScene");
+            // SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         }
     }
 }
