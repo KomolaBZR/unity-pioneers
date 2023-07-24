@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,6 +7,7 @@ public class RabbitDefaultMovement : MonoBehaviour
 {
 	public Transform targetObject;
 	public GameObject gameOverWindow;
+	public SoundManager soundManager;
 	private CharacterController characterController;
 	private Animator animator;
 
@@ -15,6 +17,8 @@ public class RabbitDefaultMovement : MonoBehaviour
 	[SerializeField] private float gravity = 20f;
 	[SerializeField] private float minDistance = 1f;
 	[SerializeField] private float maxDistance = 100f;
+	[SerializeField] private float jumpForce = 8f;
+
 
 	private UnityEngine.Vector3 movement = Vector3.zero;
 	private bool gameOver = false;
@@ -31,8 +35,6 @@ public class RabbitDefaultMovement : MonoBehaviour
 	{
 		if (!gameOver)
 		{
-			//Vector3 velocity = characterController.velocity;
-			//float speed = velocity.magnitude;
 			Vector3 direction = targetObject.position - transform.position;
 			transform.LookAt(targetObject);
 
@@ -45,8 +47,27 @@ public class RabbitDefaultMovement : MonoBehaviour
 
 			if (distance > minDistance && distance < maxDistance)
 			{
+				RaycastHit hit;
+        		float barrierRaycastDistance = 2f;
+
 				// Move towards the player
 				movement = -transform.forward * moveSpeed * Time.deltaTime;
+
+				if (Physics.Raycast(transform.position, -transform.forward, out hit, barrierRaycastDistance))
+				{
+					// UnityEngine.Debug.Log(Physics.Raycast(transform.position, -transform.forward, out hit, barrierRaycastDistance));
+					// UnityEngine.Debug.DrawRay(transform.position, -transform.forward * barrierRaycastDistance, Color.red);
+
+					if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Barrier"))
+					// if(hit.collider.CompareTag("Barrier"))
+					{
+						UnityEngine.Debug.Log("in tag barrier..");
+
+						UnityEngine.Debug.DrawRay(transform.position, -transform.forward * barrierRaycastDistance, Color.red);
+						movement.y = jumpForce;
+					}
+				}
+				
 				movement.y -= gravity * Time.deltaTime;
 				characterController.Move(movement);
 
@@ -58,6 +79,7 @@ public class RabbitDefaultMovement : MonoBehaviour
 				// Stop moving and play idle animation
 				animator.SetBool("isRunning", false);
 			}
+
 		}
 	}
 
@@ -71,7 +93,10 @@ public class RabbitDefaultMovement : MonoBehaviour
 	}
 	private void Die()
 	{
-		deathSound.Play();
+		if (soundManager.muted == false)
+		{
+			deathSound.Play();
+		}
 		gameOverWindow.SetActive(true);
 		gameOver = true;
 	}

@@ -16,4 +16,9 @@ public class StartMenu : MonoBehaviour
         }
     }
 
+    public void GoBack()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
+    }
+
 }

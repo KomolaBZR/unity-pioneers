@@ -8,14 +8,20 @@ public class FoxDefaultMovement : MonoBehaviour
 {
 	public Transform player;
 	public GameObject gameOverWindow;
+	public SoundManager soundManager;
 	private CharacterController characterController;
 	private Animator animator;
 	[SerializeField] AudioSource deathSound;
 	[SerializeField] private float moveSpeed = 4f;
 	[SerializeField] private float rotationSpeed = 10f;
+	[SerializeField] private float gravity = 20f;
 	[SerializeField] private float minDistance = 1f;
 	[SerializeField] private float maxDistance = 10f;
+	[SerializeField] private float jumpForce = 8f;
 	private bool gameOver = false;
+	private UnityEngine.Vector3 movement = Vector3.zero;
+
+	Vector3 startPositon;
 
 	private void Start()
 	{
@@ -23,15 +29,17 @@ public class FoxDefaultMovement : MonoBehaviour
 
 		characterController = GetComponent<CharacterController>();
 		animator = GetComponent<Animator>();
+
+		startPositon = player.position;
 	}
 
 	private void Update()
 	{
-		if (!gameOver)
-		{
-			Vector3 direction = player.position - transform.position;
-			direction.y = 0f;
+		Vector3 direction = player.position - transform.position;
+		direction.y = 0f;
 
+		if (!gameOver && startPositon != player.position)
+		{
 			// Rotate towards the player
 			Quaternion targetRotation = Quaternion.LookRotation(direction);
 			transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
@@ -40,8 +48,30 @@ public class FoxDefaultMovement : MonoBehaviour
 
 			if (distance > minDistance && distance < maxDistance)
 			{
+				RaycastHit hit;
+        		float barrierRaycastDistance = 2f;
+
 				// Move towards the player
-				Vector3 movement = transform.forward * moveSpeed * Time.deltaTime;
+				movement = transform.forward * moveSpeed * Time.deltaTime;
+
+				if (Physics.Raycast(transform.position, transform.forward, out hit, barrierRaycastDistance))
+				{
+					UnityEngine.Debug.Log(Physics.Raycast(transform.position, transform.forward, out hit, barrierRaycastDistance));
+					UnityEngine.Debug.DrawRay(transform.position, transform.forward * barrierRaycastDistance, Color.red);
+					UnityEngine.Debug.Log(hit.collider.gameObject.layer);
+					UnityEngine.Debug.Log(LayerMask.NameToLayer("Barrier"));
+					UnityEngine.Debug.Log("Tag matches to Berrier: " + hit.collider.CompareTag("Barrier"));
+
+					// if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Barrier"))
+					if(hit.collider.CompareTag("Barrier"))
+					{
+						UnityEngine.Debug.Log("in tag barrier..");
+
+						UnityEngine.Debug.DrawRay(transform.position, transform.forward * barrierRaycastDistance, Color.red);
+						movement.y = jumpForce;
+					}
+				}
+				movement.y -= gravity * Time.deltaTime;
 				characterController.Move(movement);
 
 				// Play animation
@@ -65,7 +95,10 @@ public class FoxDefaultMovement : MonoBehaviour
 
 	private void Die()
 	{
-		deathSound.Play();
+		if(soundManager.muted == false)
+		{
+			deathSound.Play();
+		}
 		gameOverWindow.SetActive(true);
 		gameOver = true;
 	}

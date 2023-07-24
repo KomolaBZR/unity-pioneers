@@ -9,6 +9,8 @@ public class ItemCollector : MonoBehaviour
     [SerializeField] Text coinsText;
     [SerializeField] AudioSource collectionSound;
 
+    public SoundManager soundManager;
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Coin"))
@@ -16,7 +18,10 @@ public class ItemCollector : MonoBehaviour
             Destroy(other.gameObject);
             coins++;
             coinsText.text = "Coins: " + coins;
-            collectionSound.Play();
+            if(soundManager.muted == false)
+            {
+                collectionSound.Play();
+            }
         }
     }
 }
