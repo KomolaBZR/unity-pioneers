@@ -445,10 +445,24 @@ BoxCollider:
   m_GameObject: {fileID: 2874551293749684896}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 2.5, y: 4, z: 1.5}
   m_Center: {x: 0.0002773488, y: 2.0140622, z: -0.004668687}
+--- !u!136 &5679569458613539026
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2874551293749684896}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 1.5
+  m_Height: 5
+  m_Direction: 1
+  m_Center: {x: 0, y: 2.2, z: -0.2}
 --- !u!82 &822995947580925311
 AudioSource:
   m_ObjectHideFlags: 0
@@ -593,6 +607,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   coinsText: {fileID: 0}
   collectionSound: {fileID: 822995947580925311}
+  soundManager: {fileID: 0}
 --- !u!114 &2941926760236368069
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -610,20 +625,6 @@ MonoBehaviour:
   jumpSpeed: 10
   gravity: 20
   accelerationDuration: 1
---- !u!136 &5679569458613539026
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2874551293749684896}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 1.5
-  m_Height: 5
-  m_Direction: 1
-  m_Center: {x: 0, y: 2.2, z: -0.2}
 --- !u!4 &3219974259613282330 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: ffba2cfcaa8e3fd42801cb49a7c87691,

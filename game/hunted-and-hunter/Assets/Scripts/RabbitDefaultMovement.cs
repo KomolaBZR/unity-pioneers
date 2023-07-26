@@ -53,17 +53,12 @@ public class RabbitDefaultMovement : MonoBehaviour
 				// Move towards the player
 				movement = -transform.forward * moveSpeed * Time.deltaTime;
 
+				// Jump over barriers
 				if (Physics.Raycast(transform.position, -transform.forward, out hit, barrierRaycastDistance))
 				{
-					// UnityEngine.Debug.Log(Physics.Raycast(transform.position, -transform.forward, out hit, barrierRaycastDistance));
-					// UnityEngine.Debug.DrawRay(transform.position, -transform.forward * barrierRaycastDistance, Color.red);
-
-					if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Barrier"))
-					// if(hit.collider.CompareTag("Barrier"))
+					if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Barrier") || hit.collider.CompareTag("Barrier"))
 					{
-						UnityEngine.Debug.Log("in tag barrier..");
-
-						UnityEngine.Debug.DrawRay(transform.position, -transform.forward * barrierRaycastDistance, Color.red);
+						// UnityEngine.Debug.DrawRay(transform.position, -transform.forward * barrierRaycastDistance, Color.red);
 						movement.y = jumpForce;
 					}
 				}

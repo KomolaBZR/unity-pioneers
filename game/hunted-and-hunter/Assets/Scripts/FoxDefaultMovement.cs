@@ -38,7 +38,7 @@ public class FoxDefaultMovement : MonoBehaviour
 		Vector3 direction = player.position - transform.position;
 		direction.y = 0f;
 
-		if (!gameOver && startPositon != player.position)
+		if (!gameOver && startPositon.z < player.position.z)
 		{
 			// Rotate towards the player
 			Quaternion targetRotation = Quaternion.LookRotation(direction);
@@ -54,23 +54,15 @@ public class FoxDefaultMovement : MonoBehaviour
 				// Move towards the player
 				movement = transform.forward * moveSpeed * Time.deltaTime;
 
+				// Jump over barriers
 				if (Physics.Raycast(transform.position, transform.forward, out hit, barrierRaycastDistance))
 				{
-					UnityEngine.Debug.Log(Physics.Raycast(transform.position, transform.forward, out hit, barrierRaycastDistance));
-					UnityEngine.Debug.DrawRay(transform.position, transform.forward * barrierRaycastDistance, Color.red);
-					UnityEngine.Debug.Log(hit.collider.gameObject.layer);
-					UnityEngine.Debug.Log(LayerMask.NameToLayer("Barrier"));
-					UnityEngine.Debug.Log("Tag matches to Berrier: " + hit.collider.CompareTag("Barrier"));
-
-					// if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Barrier"))
-					if(hit.collider.CompareTag("Barrier"))
+					if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Barrier") || hit.collider.CompareTag("Barrier"))
 					{
-						UnityEngine.Debug.Log("in tag barrier..");
-
-						UnityEngine.Debug.DrawRay(transform.position, transform.forward * barrierRaycastDistance, Color.red);
 						movement.y = jumpForce;
 					}
 				}
+
 				movement.y -= gravity * Time.deltaTime;
 				characterController.Move(movement);
 
