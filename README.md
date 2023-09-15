@@ -21,20 +21,23 @@ To play Hunted and Hunter, you will need the following:
 
 1. **Unity Program:** Ensure you have the Unity development environment installed.
 
-2. **Windows:** You can download the Windows version of the game from [here](<Windows_Download_Link>).
+2. **Windows:** You can download the Windows version of the game from [here](https://drive.google.com/file/d/18zPQbcY5mCN40LgSNRAbj0WvQRBCQHb7/view?usp=drive_link).
 
-3. **Mac:** You can download the Mac version of the game from [here](<Mac_Download_Link>).
+3. **Mac:** You can download the Mac version of the game from [here](https://drive.google.com/file/d/12xbUpm-xAcYjSjKN5hjZzJumlCwMueXm/view?usp=sharing).
 
 ## Gameplay Instructions:
 
-- As a rabbit: Use [Controls for Rabbit] to navigate the obstacles and collect carrots.
-- As a fox: Use [Controls for Fox] to chase the rabbit and try to catch it before it reaches the house.
+- **Controls:**
+  - Key Forward: Run forward
+  - Key Right: Turn right
+  - Key Left: Turn left
+  - Space: Jump
 
 ## Screenshots and Gameplay Videos:
 
 ![Main Image](./notebook/images/main_image.png)
 ![Fox Role Image](./notebook/images/foxscene.png)
-![Trailer Video](./notebook/videos/hunted_and_hunter_trailer_compres.mp4)
+![Trailer Video](https://gitlab.beuth-hochschule.de/s51006/unity-pioneers-new/-/blob/main/notebook/videos/hunted_and_hunter_trailer_compres.mp4?ref_type=heads)
 
 ## Features:
 
