@@ -37,7 +37,7 @@ To play Hunted and Hunter, you will need the following:
 
 ![Main Image](./notebook/images/main_image.png)
 ![Fox Role Image](./notebook/images/foxscene.png)
-![Trailer Video](https://gitlab.beuth-hochschule.de/s51006/unity-pioneers-new/-/blob/main/notebook/videos/hunted_and_hunter_trailer_compres.mp4?ref_type=heads)
+![Trailer Video](./notebook/videos/hunted_and_hunter_trailer_compres.mp4)
 
 ## Features:
 
